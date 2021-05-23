@@ -1,0 +1,3 @@
+[submodule "blogresource"]
+	path = blogresource
+	url = https://github.com/sanseongKo/sanseongKo.github.io.git
