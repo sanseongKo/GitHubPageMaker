@@ -8,5 +8,5 @@ class: page-template
 subclass: 'post page'
 ---
 
-이것은 소리없는 아우성!
+이것은 소리없는 아우성!!
 빌드 및 배포 자동화 실행!!
