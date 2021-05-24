@@ -45,10 +45,10 @@ url: https://sanseongKo.github.io
 baseurl: /
 
 # Website info
-title: IT Technical Training
+title: 공부용 블로그
 # 자신의 blog title.
 
-description: IT기반기술교육 블로그
+description: 온리 공부를 위한 블로그
 # blog home에 표시될 blog에 대한 전반적인 설명.
 
 cover: assets/built/images/blog-cover1.jpg
