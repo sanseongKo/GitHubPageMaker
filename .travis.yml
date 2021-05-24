@@ -1,4 +1,4 @@
-
+sudo: false
 language: ruby
 cache: bundler
 rvm:
@@ -11,7 +11,6 @@ install:
 before_script:
   - git config --global user.email "tkstjd56@naver.com"
   - git config --global user.name "sanseongKo"
-  - git config --global user.password "a03021548"
 
 script: bundle exec rake site:deploy --quiet #--trace
 
