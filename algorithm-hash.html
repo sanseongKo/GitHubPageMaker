@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Algorithm Hash 개념정리</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <!-- custom.css -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/custom.css"/>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- 웹폰트 추가 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css">
+
+    <!-- syntax.css 추가 -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css"/>
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="온리 공부를 위한 블로그" />
+    <link rel="shortcut icon" href="https://sanseongKo.github.io/assets/built/images/favicon.jpg" type="image/png" />
+    <link rel="canonical" href="https://sanseongKo.github.io/algorithm-hash" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="SanseongKo's Blog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Algorithm Hash 개념정리" />
+    <meta property="og:description" content="오늘은 Hash에 대하여 정리를 해보려고 한다. 주 언어가 Java이다보니 HashMap은 많이 써보았지만, 정확하게 정리를 해본적은 없는 듯하여 정리를 해보려한다. 내가 알고 있던 Hash에선 키와 값이 있으며, 키를 인덱스로 가지고 있기 때문에 시간복잡도가 O(1)이라는 것. 1 해시 해시는 임의의 크기를 가진 데이터를 고정된 데이터 크기로 변화시키는 것을 말하며, 해시함수를 사용하여 값을" />
+    <meta property="og:url" content="https://sanseongKo.github.io/algorithm-hash" />
+    <meta property="og:image" content="https://sanseongKo.github.io/assets/built/images/algorithm/algorithm.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2021-05-25T00:00:00+00:00" />
+    <meta property="article:modified_time" content="2021-05-25T00:00:00+00:00" />
+    <meta property="article:tag" content="Algorithm" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Algorithm Hash 개념정리" />
+    <meta name="twitter:description" content="오늘은 Hash에 대하여 정리를 해보려고 한다. 주 언어가 Java이다보니 HashMap은 많이 써보았지만, 정확하게 정리를 해본적은 없는 듯하여 정리를 해보려한다. 내가 알고 있던 Hash에선 키와 값이 있으며, 키를 인덱스로 가지고 있기 때문에 시간복잡도가 O(1)이라는 것. 1 해시 해시는 임의의 크기를 가진 데이터를 고정된 데이터 크기로 변화시키는 것을 말하며, 해시함수를 사용하여 값을" />
+    <meta name="twitter:url" content="https://sanseongKo.github.io/" />
+    <meta name="twitter:image" content="https://sanseongKo.github.io/assets/built/images/algorithm/algorithm.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="SanseongKo's Blog" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Algorithm" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:creator" content="@" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "SanseongKo's Blog",
+        "logo": "https://sanseongKo.github.io/"
+    },
+    "url": "https://sanseongKo.github.io/algorithm-hash",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://sanseongKo.github.io/assets/built/images/algorithm/algorithm.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://sanseongKo.github.io/algorithm-hash"
+    },
+    "description": "오늘은 Hash에 대하여 정리를 해보려고 한다. 주 언어가 Java이다보니 HashMap은 많이 써보았지만, 정확하게 정리를 해본적은 없는 듯하여 정리를 해보려한다. 내가 알고 있던 Hash에선 키와 값이 있으며, 키를 인덱스로 가지고 있기 때문에 시간복잡도가 O(1)이라는 것. 1 해시 해시는 임의의 크기를 가진 데이터를 고정된 데이터 크기로 변화시키는 것을 말하며, 해시함수를 사용하여 값을"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Algorithm Hash 개념정리" href="/feed.xml" />
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://sanseongKo.github.io/">SanseongKo's Blog</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
+    <li class="nav-jekyll" role="menuitem"><a href="/tag/algorithm/">Algorithm</a></li>
+    <li class="nav-python" role="menuitem"><a href="/tag/python/">Python</a></li>
+    <li class="nav-python" role="menuitem"><a href="/tag/java/">Java</a></li>
+    <li class="nav-archive" role="menuitem">
+        <a href="/archive.html">All Posts</a>
+    </li>
+    <li class="nav-archive" role="menuitem">
+        <a href="/author_archive.html">Tag별 Posts</a>
+    </li>
+</ul>
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+            
+        </div>
+        
+            <a class="subscribe-button" href="#subscribe">Search</a>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full  tag-algorithm post tag-algorithm ">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="25 May 2021">25 May 2021</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/tag/algorithm/'>ALGORITHM</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">Algorithm Hash 개념정리</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/assets/built/images/algorithm/algorithm.png)">
+            </figure>
+            <!--커버필요없으면 주석 -->
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>오늘은 Hash에 대하여 정리를 해보려고 한다.</p>
+
+<p>주 언어가 Java이다보니 HashMap은 많이 써보았지만, 정확하게 정리를 해본적은 없는 듯하여 정리를 해보려한다.</p>
+
+<p>내가 알고 있던 Hash에선 키와 값이 있으며, 키를 인덱스로 가지고 있기 때문에 시간복잡도가 O(1)이라는 것.</p>
+
+<h3>1 해시</h3>
+<ul>
+  <li>해시는 임의의 크기를 가진 데이터를 고정된 데이터 크기로 변화시키는 것을 말하며,</li>
+  <li>해시함수를 사용하여 값을 계산하여 나온 고정된 길이의 값을 해시값이라고 부른다.</li>
+  <li>여러 분야에 사용되며, 복잡하지 않은 알고리즘으로 이루어져 CPU,메모리 등 시스템 자원을 덜 소모한다고 한다.</li>
+  <li>여러분야 사용되고 여러가지(MDn, SHA-n 등) 해시 알고리즘이 있지만(자세하게 다룰일이 있으면 추가해야지)</li>
+</ul>
+
+<p><img src="./assets/built/images/algorithm/hash/hash_hash.png" alt="ex_screenshot" /></p>
+
+<h3>2 해시 충돌</h3>
+<p>해시 충돌은 해시함수를 거친 키값이 같은 값들. 즉, 다른 데이터의 키 값(해시값)들이 동일할 경우 해시 충돌이 발생한다.
+이 충돌은 해시 테이블의 성능을 떨어뜨린다. 
+해시 충돌을 방지하려면 해시 함수를 잘 정의하면 된다. 하지만 해시함수의 입력값은 무한하지만, 
+출력값의 가짓수는 유한(출력값, 즉 키가 유한하지 않다면 해시기법을 사용하는 의미가 없다.)하므로 
+해시 충돌은 반드시 발생한다.(비둘기집 원리)</p>
+
+<p>이러한 해시충돌을 방지할 방법은 크게 2가지가 있다.
+<b>체이닝(Chaining)</b>
+버킷내에 LinkedList를 할당하여, Bucket에 데이터를 저장하다가 해시 충돌이 발생하면 연결리스트로 데이터를 연결하는 방식이다.</p>
+
+<p><b>개방 주소법(Open Addressing)</b>
+해시 충돌이 발생하면 다른 Bucket에 데이터를 삽입하는 방식이다.
+체이닝은 주소값은 동일한 상태로 LinkedList를 이용하여 늘려가기 때문에, 주소값이 변경되지는 않는다는 부분과 차이가 있다.
+<img src="./assets/built/images/algorithm/hash/hash_chaining1.PNG" alt="ex_screenshot" /></p>
+
+<p><b>3가지 개방 주소법</b></p>
+<ul>
+  <li><b>선형 탐색<Linear Probing="">&lt;/b&gt;: 해시 충돌 시 다음 버킷 혹은 몇개를 건너뛰어 데이터를 삽입</Linear></b></li>
+  <li><b>제곱 탐색<Quadratic Probing="">&lt;/b&gt;: 해시 충돌 시 제곱만큼 건너뛴 버켓에 데이터를 삽입</Quadratic></b></li>
+  <li><b>이중 해시<Double Hashing="">&lt;/b&gt;: 해시 충돌 시 다른 해시 함수를 한 번 더 적용한 결과를 이용</Double></b></li>
+</ul>
+
+<p><img src="./assets/built/images/algorithm/hash/hash_openaddressing.PNG" alt="ex_screenshot" /></p>
+
+<h3>해시를 이용한 자료구조</h3>
+<p>해시를 이용한 자료구조엔 <b>HashMap, HashTable</b>이 있다.
+둘의 차이는 <b>동기화 지원</b>이 가능하냐 안하냐의 차이(synchronized)가 있다고 한다.</p>
+
+<h3>해시 자료구조의 시간 복잡도</h3>
+<p>해시함수로 만들어진 키값들은 고유한 인덱스를 가지게 되어 바로 접근할 수 있다.
+그러므로 평균 O(1)의 시간복잡도를 가지고 있지만, 데이터 충돌이 발생할 경우 Chaining에 연결된 리스트들까지
+검색해야 하므로 O(N)까지 시간복잡도가 증가할 수 있다.
+충돌을 방지하는 방법들은 데이터의 규칙성(클러스터링)을 방지하기 위한 방식이지만 공간을 많이 사용한다는 치명적인 단점이 있다.</p>
+
+<p>만약 테이블이 꽉 차있는 경우라면 테이블을 확장해주어야 하는데, 이는 매우 심각한 성능의 저하를 불러오기 때문에 가급적이면 확장을 하지 않도록 테이블을 설계해주어야 한다.</p>
+
+<p>(통계적으로 해시 테이블의 공간 사용률이 70% ~ 80%정도가 되면 해시의 충돌이 빈번하게 발생하여 성능이 저하되기 시작한다고 한다.)</p>
+
+<p>또한 해시 테이블에서 자주 사용하게 되는 데이터를 Cache에 적용하면 효율을 높일 수 있다. 자주 hit하게 되는 데이터를 캐시에서 바로 찾음으로써 해시 테이블의 성능을 향상시킬 수 있다</p>
+
+<p><img src="./assets/built/images/algorithm/hash/hash_chaining_time.PNG" alt="ex_screenshot" /></p>
+
+<p>출처 
+https://mangkyu.tistory.com/102 [MangKyu’s Diary]
+https://preamtree.tistory.com/20 [Preamtree의 행복로그]</p>
+
+
+                </div>
+            </section>
+
+            <!-- Email subscribe form at the bottom of the page -->
+            <!--
+            
+                <section class="subscribe-form">
+                    <h3 class="subscribe-form-title">Subscribe to SanseongKo's Blog</h3>
+                    <p>Get the latest posts delivered right to your inbox</p>
+                    <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()"
+               id="searchtext" type="text" name="searchtext"
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+                </section>
+            
+            -->
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function () {
+                            var this_page_url = 'https://sanseongKo.github.io/algorithm-hash';
+                            var this_page_identifier = '/algorithm-hash';
+                            var this_page_title = 'Algorithm Hash 개념정리';
+                        };
+                        (function() {
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://xxxxxxxx.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                </section>
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/newPosting">
+                <div class="post-card-image" style="background-image: url(/assets/built/images/thumbnail_for_firstposting.png)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/newPosting">
+                <header class="post-card-header">
+                    
+
+                    <h2 class="post-card-title">첫 포스팅!</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>
+
+
+
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://sanseongKo.github.io/">
+            
+            <span>SanseongKo's Blog</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Algorithm Hash 개념정리</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Algorithm+Hash+%EA%B0%9C%EB%85%90%EC%A0%95%EB%A6%AC&amp;url=https://sanseongKo.github.io/algorithm-hash"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://sanseongKo.github.io/algorithm-hash"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://sanseongKo.github.io/">SanseongKo's Blog</a> &copy; 2021</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+    <div id="subscribe" class="subscribe-overlay">
+        <a class="subscribe-overlay-close" href="#"></a>
+        <div class="subscribe-overlay-content">
+            
+            <h1 class="subscribe-overlay-title">Search SanseongKo's Blog</h1>
+            <p class="subscribe-overlay-description">
+                lunr.js를 이용한 posts 검색 </p>
+            <span id="searchform" method="post" action="/subscribe/" class="">
+    <input class="confirm" type="hidden" name="confirm"  />
+    <input class="location" type="hidden" name="location"  />
+    <input class="referrer" type="hidden" name="referrer"  />
+
+    <div class="form-group">
+        <input class="subscribe-email" onkeyup="myFunc()"
+               id="searchtext" type="text" name="searchtext"
+               placeholder="Search..." />
+    </div>
+    <script type="text/javascript">
+        function myFunc() {
+            if(event.keyCode == 13) {
+                var url = encodeURIComponent($("#searchtext").val());
+                location.href = "/search.html?query=" + url;
+            }
+        }
+    </script>
+</span>
+        </div>
+    </div>
+    
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-xxxxxxxx-x', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>
