@@ -5,11 +5,16 @@ cover:  assets/built/images/thumbnail_for_firstposting.png
 navigation: True
 title: 첫 포스팅!
 date: 2021-05-25
-tags
+tags:
 class: post-template
 subclass: 
 author: Ko
 ---
+
+<p></p>
+<p></p>
+<p></p>
+<p></p>
 
 우역곡절 끝에 지킬을 이용하여 깃허브 블로그 페이지를 만들었다.(travis ci는 하다가 포기...)
 

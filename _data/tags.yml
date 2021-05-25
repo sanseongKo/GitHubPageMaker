@@ -6,3 +6,7 @@ java :
   name: java
   description: False
   cover: assets/built/images/background-frontend.png
+algorithm :
+  name: algorithm
+  description: False
+  cover: assets/built/images/background-frontend.png
