@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover:  assets/built/images/background-frontend.jpg
+cover:  assets/built/images/algorithm/algorithm.png
 navigation: True
 title: Algorithm Hash 개념정리
 date: 2021-05-25
@@ -45,9 +45,9 @@ author: Ko
 ![ex_screenshot](./assets/built/images/algorithm/hash/hash_chaining1.PNG)
 
 <b>3가지 개방 주소법</b>
-- <b>선형 탐색<Linear Probing>:</b> 해시 충돌 시 다음 버킷 혹은 몇개를 건너뛰어 데이터를 삽입
-- <b>제곱 탐색<Quadratic Probing>:</b> 해시 충돌 시 제곱만큼 건너뛴 버켓에 데이터를 삽입
-- <b>이중 해시<Double Hashing>:</b> 해시 충돌 시 다른 해시 함수를 한 번 더 적용한 결과를 이용
+- <b>선형 탐색<Linear Probing></b>: 해시 충돌 시 다음 버킷 혹은 몇개를 건너뛰어 데이터를 삽입
+- <b>제곱 탐색<Quadratic Probing></b>: 해시 충돌 시 제곱만큼 건너뛴 버켓에 데이터를 삽입
+- <b>이중 해시<Double Hashing></b>: 해시 충돌 시 다른 해시 함수를 한 번 더 적용한 결과를 이용
   
 ![ex_screenshot](./assets/built/images/algorithm/hash/hash_openaddressing.PNG)
   
@@ -61,8 +61,11 @@ author: Ko
 그러므로 평균 O(1)의 시간복잡도를 가지고 있지만, 데이터 충돌이 발생할 경우 Chaining에 연결된 리스트들까지
 검색해야 하므로 O(N)까지 시간복잡도가 증가할 수 있다.
 충돌을 방지하는 방법들은 데이터의 규칙성(클러스터링)을 방지하기 위한 방식이지만 공간을 많이 사용한다는 치명적인 단점이 있다.
+
 만약 테이블이 꽉 차있는 경우라면 테이블을 확장해주어야 하는데, 이는 매우 심각한 성능의 저하를 불러오기 때문에 가급적이면 확장을 하지 않도록 테이블을 설계해주어야 한다.
+
 (통계적으로 해시 테이블의 공간 사용률이 70% ~ 80%정도가 되면 해시의 충돌이 빈번하게 발생하여 성능이 저하되기 시작한다고 한다.)
+
 또한 해시 테이블에서 자주 사용하게 되는 데이터를 Cache에 적용하면 효율을 높일 수 있다. 자주 hit하게 되는 데이터를 캐시에서 바로 찾음으로써 해시 테이블의 성능을 향상시킬 수 있다
 
 ![ex_screenshot](./assets/built/images/algorithm/hash/hash_chaining_time.PNG)
